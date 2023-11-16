@@ -1,15 +1,17 @@
 from django.shortcuts import render, redirect
 from .models import Empresa
+import json
 
 def registro(request):
     return render(request, 'registro.html')
 
 def valida_registro(request):
-    nome_emp = request.POST.get('nome_emp')
-    email_adm = request.POST.get('email_adm')
-    num_func = request.POST.get('num_func')
-    area_atua = request.POST.get('area_atua')
-    senha = request.POST.get('senha')
+    data = json.loads(request.body)
+    nome_emp = data.get('nome_emp')
+    email_adm = data.get('email_adm')
+    num_func = data.get('num_func')
+    area_atua = data.get('area_atua')
+    senha = data.get('senha')
 
     empresa = Empresa(nome_emp=nome_emp,
                       email_adm=email_adm,
